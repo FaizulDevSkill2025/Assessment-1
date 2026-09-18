@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Website Layout</title>
+    <style>
+        /* Color Palette from Q2 */
+        :root {
+            --header-bg: #0d1b2a;       /* Header, banner background */
+            --accent-color: #1C3965;    /* Accents, borders, marquee text */
+            --subtle-bg: #e8c97c;       /* Subtle background, highlights */
+            --page-bg: #fdf8f0;         /* Page background */
+            --main-text: #3df461;       /* Main text, default dark */
+            --secondary-bg: #8a9ab0;    /* Secondary buttons, hover text */
+            --card-border: #dce3ec;     /* Card borders, divider */
+            --card-bg: #FFFFFF;         /* Card background */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--page-bg);
+            color: var(--main-text);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wireframe-container {
+            width: 100%;
+            max-width: 1000px;
+            border: 2px solid var(--accent-color);
+            background-color: var(--card-bg);
+        }
+
+        /* 1. Header Section */
+        header {
+            display: flex;
+            background-color: var(--header-bg);
+            border-bottom: 2px solid var(--accent-color);
+            color: white;
+        }
+
+        .logo-area {
+            width: 25%;
+            padding: 30px 20px;
+            border-right: 2px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .title-area {
+            width: 75%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* 2. Navbar Section */
+        nav {
+            display: flex;
+            background-color: var(--subtle-bg);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        nav a {
+            flex: 1;
+            text-align: center;
+            padding: 12px 0;
+            text-decoration: none;
+            color: var(--accent-color);
+            font-weight: bold;
+            border-right: 1px solid var(--card-border);
+            transition: background-color 0.2s;
+        }
+
+        nav a:last-child {
+            border-right: none;
+        }
+
+        nav a:hover {
+            background-color: var(--secondary-bg);
+        }
+
+        /* 3. Marquee Section */
+        .marquee-container {
+            background-color: var(--card-bg);
+            border-bottom: 2px solid var(--accent-color);
+            padding: 8px;
+            overflow: hidden;
+        }
+
+        marquee {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* 4. Main Content Area */
+        .main-content {
+            display: flex;
+            border-bottom: 2px solid var(--accent-color);
+            min-height: 350px;
+        }
+
+        /* Left Content Column */
+        .content-left {
+            width: 60%;
+            padding: 20px;
+            border-right: 2px solid var(--accent-color);
+        }
+
+        .description-block {
+            display: flex;
+            gap: 20px;
+        }
+
+        .image-placeholder {
+            width: 140px;
+            height: 160px;
+            border: 2px dashed var(--card-border);
+            background-color: var(--page-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--card-border);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .text-placeholder {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-top: 5px;
+        }
+
+        .line {
+            height: 12px;
+            background-color: var(--secondary-bg);
+            border-radius: 4px;
+            width: 100%;
+        }
+        .line.short { width: 75%; }
+        .line.shorter { width: 50%; }
+
+        /* Right Notice Board Column */
+        .notice-board {
+            width: 40%;
+            background-color: var(--page-bg);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notice-title {
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 2px solid var(--accent-color);
+            background-color: var(--subtle-bg);
+            color: var(--accent-color);
+            position: sticky;
+            top: 0;
+            z-index: 3;
+        }
+
+        .notice-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            animation: notice-scroll 12s linear infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes notice-scroll {
+            0% {
+                transform: translateY(-50%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .notice-item {
+            flex: 1;
+            min-height: 44px;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--card-bg);
+            font-size: 14px;
+        }
+
+        .notice-item:last-child {
+            border-bottom: none;
+        }
+
+        .notice-item:nth-child(even) {
+            background-color: var(--subtle-bg);
+        }
+
+        .arrow {
+            color: var(--header-bg);
+            font-weight: bold;
+        }
+
+        /* 5. Faculty Cards Section */
+        .faculty-section {
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .faculty-title {
+            padding: 10px 20px;
+            font-weight: bold;
+            background-color: var(--subtle-bg);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .faculty-grid {
+            display: flex;
+        }
+
+        .faculty-card {
+            flex: 1;
+            text-align: center;
+            padding: 40px 0;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            border-right: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .faculty-card:last-child {
+            border-right: none;
+        }
+
+        .faculty-card:hover {
+            background-color: var(--secondary-bg);
+        }
+
+        /* 6. Footer Section */
+        footer {
+            background-color: var(--subtle-bg);
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--main-text);
+        }
+
+        footer .email {
+            font-weight: bold;
+            margin-top: 5px;
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wireframe-container">
+        
+        <!-- 1. Header -->
+        <header>
+            <div class="logo-area">
+                <img src="/cou.png" alt="Company Logo" style="max-width: 70%; max-height: 70%;">
+            </div>
+            <div class="title-area">Website Title / Company Name</div>
+        </header>
+
+        <!-- 2. Navbar -->
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Academics</a>
+            <a href="#">Administration</a>
+            <a href="#">Faculty</a>
+            <a href="#">Contact us</a>
+        </nav>
+
+        <!-- 3. Marquee -->
+        <div class="marquee-container">
+            <marquee behavior="scroll" direction="left">
+                EMCS 3rd Semester Web Technologies Exam - University Website Layout
+            </marquee>
+        </div>
+
+        <!-- 4. Main Content Section -->
+        <div class="main-content">
+            <!-- Left Side Content -->
+            <div class="content-left">
+                <div class="description-block">
+                    <div class="image-placeholder">
+                        <img src="/banner010101.jpg" alt="" style="max-width: 100%; max-height: 100%;">
+                    </div>
+                    <div class="text-placeholder">
+                        <h2>About Us</h2>
+                        <p style="color: var(--main-text);">
+                            Welcome to our university! We are dedicated to providing excellent education and research opportunities for all our students.
+                        </p>
+                        <!--<div class="line"></div>-->
+                        <!-- <div class="line"></div> -->
+                        <!--<div class="line short"></div>-->
+                        <!-- <div class="line shorter"></div> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side Notice Board -->
+            <div class="notice-board">
+                <div class="notice-title">Notice Board</div>
+                <ul class="notice-list">
+                    <li class="notice-item"><span>06 News</span> <span class="arrow">&rarr;</span></li>
+                    <li class="notice-item"><span>05 News</span> <span class="arrow">&rarr;</span></li>
+                    <li class="notice-item"><span>04 News</span> <span class="arrow">&rarr;</span></li>
+                    <li class="notice-item"><span>03 News</span> <span class="arrow">&rarr;</span></li>
+                    <li class="notice-item"><span>02 News</span> <span class="arrow">&rarr;</span></li>
+                    <li class="notice-item"><span>01 News</span> <span class="arrow">&rarr;</span></li>
+                    <li class="notice-item"><span>06 News</span> <span class="arrow">&rarr;</span></li>
+                    <li class="notice-item"><span>05 News</span> <span class="arrow">&rarr;</span></li>
+                    <li class="notice-item"><span>04 News</span> <span class="arrow">&rarr;</span></li>
+                    <li class="notice-item"><span>03 News</span> <span class="arrow">&rarr;</span></li>
+                    <li class="notice-item"><span>02 News</span> <span class="arrow">&rarr;</span></li>
+                    <li class="notice-item"><span>01 News</span> <span class="arrow">&rarr;</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. Faculty Cards Section -->
+        <div class="faculty-section">
+            <div class="faculty-title">Faculty List</div>
+            <div class="faculty-grid">
+                <div class="faculty-card">CSE</div>
+                <div class="faculty-card">ICT</div>
+                <div class="faculty-card">MATH</div>
+                <div class="faculty-card">PHY</div>
+            </div>
+        </div>
+
+        <!-- 6. Footer Section -->
+        <footer>
+            <div>Contact info</div>
+            <div class="email">copyright &copy; 2023 Hello.com</div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
